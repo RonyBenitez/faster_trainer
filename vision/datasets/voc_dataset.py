@@ -64,10 +64,11 @@ class VOCDataset:
         labels = []
         is_difficult = []
         for line in open(annotation_file):
-            if(len(line.split()[1:])!=4):continue
+            if(len(line.split()[1:])!=4 or int(line.split()[0])==5):continue
             x1,y1,x2,y2=[float(d) for d in line.split()[1:]]
             boxes.append([x1,y1,x2,y2])
-            labels.append(1)
+            label=int(line.split()[0])
+            labels.append(1 if label in [1,2,3] else 0)
             is_difficult.append(0)
 
         return (np.array(boxes, dtype=np.float32),
