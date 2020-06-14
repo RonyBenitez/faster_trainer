@@ -6,9 +6,9 @@ mkdir -p "$log_dir"
 
 python3 -u train.py \
   --datasets \
-  ./data/wider_face_add_lm_10_10 \
+  ./data \
   --validation_dataset \
-  ./data/wider_face_add_lm_10_10 \
+  ./data \
   --net \
   slim \
   --num_epochs \
