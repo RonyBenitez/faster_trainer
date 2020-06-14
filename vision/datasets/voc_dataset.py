@@ -59,15 +59,16 @@ class VOCDataset:
         return ids
 
     def _get_annotation(self, image_id):
-        annotation_file = self.root / f"Annotations/{image_id}.txt"
+        annotation_file = self.root / f"Annotations/{image_id}.jpg.txt"
         boxes = []
         labels = []
         is_difficult = []
         for line in open(annotation_file):
+            if(len(line.split()[1:])!=4):continue
             x1,y1,x2,y2=[float(d) for d in line.split()[1:]]
             boxes.append([x1,y1,x2,y2])
             labels.append(1)
-            is_difficult.append(1)
+            is_difficult.append(0)
 
         return (np.array(boxes, dtype=np.float32),
                 np.array(labels, dtype=np.int64),
